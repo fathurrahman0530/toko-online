@@ -7,52 +7,42 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    
-    public function index(){
 
+    public function index()
+    {
         $products = Product::all();
         // dd($products);
         return view('products.index', compact(['products']));
-
     }
 
-    public function create(){
-
+    public function create()
+    {
         return view('products.create');
-
     }
 
-    public function store(Request $request){
-
+    public function store(Request $request)
+    {
         Product::create($request->all());
-
         return redirect('/products');
-
     }
 
-    public function edit($id){
-
+    public function edit($id)
+    {
         $product = Product::find($id);
         return view('products.edit', compact(['product']));
-
     }
 
     public function update(Request $request, $id)
     {
-
         $product = Product::find($id);
         $product->update($request->all());
         return redirect('/products');
-
     }
 
     public function destroy($id)
     {
-
         $product = Product::find($id);
         $product->delete();
         return redirect('/products');
-
     }
-
 }
